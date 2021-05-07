@@ -16,24 +16,16 @@
 </template>
 
 <script>
-import { getMarketSumData } from "@/service/market";
-
 export default {
   name: 'HelloWorld',
   data() {
-    return {
-      columns: ["lots_total", "net_total", "cost_total", "rebate_total"],
-      products: ["CMX HG COPPER", "CMX SILVER" , "CMX GOLD", "ICUS COTTON", "ICE US COFFEE", "CBOT MINI DOW", "EURX EURO-BOBL", "CBT CORN", "ICEUS FCOJ-A"],
-      date: { "from": 20200902, "to": 20200930 },
-      marketData: {},
-    }
+    return {}
   },
   props: {
-    msg: String
+    columns: Array,
+    marketData: Object,
   },
-  async mounted() {
-    this.marketData = (await getMarketSumData(this.columns, this.period, this.products, this.date)).data;
-  },
+  async mounted() {},
   methods: {
 
   }
