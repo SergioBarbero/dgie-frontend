@@ -24,6 +24,13 @@
         </b-form-checkbox-group>
       </b-form-group>
     </div>
+    <div>
+      <b-form-group label="Individual radios" v-slot="{ ariaDescribedby }">
+        <b-form-radio v-model="period" :aria-describedby="ariaDescribedby" name="period-radio" value="daily">Daily</b-form-radio>
+        <b-form-radio v-model="period" :aria-describedby="ariaDescribedby" name="period-radio" value="weekly">Weekly</b-form-radio>
+        <b-form-radio v-model="period" :aria-describedby="ariaDescribedby" name="period-radio" value="monthly">Monthly</b-form-radio>
+      </b-form-group>
+    </div>
     <button @click="loadData">Load data</button>
     <DashBoard :marketData="marketData" :date="date"/>
   </div>
@@ -37,6 +44,7 @@ export default {
   name: 'App',
   data() {
     return {
+      period: '',
       selectedColumns: [],
       totalColumns: ["lots_total", "net_total", "cost_total", "rebate_total"],
       selectedProducts: [],

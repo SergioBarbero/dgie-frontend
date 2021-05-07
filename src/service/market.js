@@ -7,7 +7,7 @@ export async function getMarketSumData(columns, period, products, date) {
 
     const data = JSON.stringify({
         "columns": columnsJoined,
-        "period": "daily",
+        "period": period,
         "product": productsJoined,
         "date": dateParsedLikeShit
     });
