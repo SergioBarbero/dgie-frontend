@@ -8,7 +8,10 @@ test("Should get market information", async () => {
   const colums = ["lots_total", "net_total", "cost_total", "rebate_total"];
   const period = "daily";
   const products = ["CMX HG COPPER", "CMX SILVER" , "CMX GOLD", "ICUS COTTON", "ICE US COFFEE", "CBOT MINI DOW", "EURX EURO-BOBL", "CBT CORN", "ICEUS FCOJ-A"];
-  const date = { "from": 20200902, "to": 20200930 };
+  const date = {
+    startDate: new Date(2020, 8, 2),
+    endDate: new Date(2020, 8, 30)
+  };
 
   const response = await getMarketSumData(colums, period, products, date);
 

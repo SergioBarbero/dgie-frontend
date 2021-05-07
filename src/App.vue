@@ -1,5 +1,14 @@
 <template>
   <div id="app">
+    <date-range-picker
+        ref="picker"
+        :locale-data="{ firstDay: 1, format: 'dd-mm-yyyy HH:mm:ss' }"
+        v-model="dateRange"
+    >
+      <template v-slot:input="picker" style="min-width: 350px;">
+        {{ picker.startDate }} - {{ picker.endDate }}
+      </template>
+    </date-range-picker>
     <div>
       <b-form-group label="Columns:" v-slot="{ ariaDescribedby }">
         <b-form-checkbox-group
@@ -32,34 +41,40 @@
       </b-form-group>
     </div>
     <button @click="loadData">Load data</button>
-    <DashBoard :marketData="marketData" :date="date"/>
+    <DashBoard :marketData="marketData"/>
   </div>
 </template>
 
 <script>
 import DashBoard from './components/Dashboard.vue'
 import { getMarketSumData } from "@/service/market";
+import DateRangePicker from 'vue2-daterange-picker'
+import 'vue2-daterange-picker/dist/vue2-daterange-picker.css'
 
 export default {
   name: 'App',
   data() {
     return {
+      dateRange : {
+        startDate: null,
+        endDate: null
+      },
       period: '',
       selectedColumns: [],
       totalColumns: ["lots_total", "net_total", "cost_total", "rebate_total"],
       selectedProducts: [],
       totalProducts: ["CMX HG COPPER", "CMX SILVER" , "CMX GOLD", "ICUS COTTON", "ICE US COFFEE", "CBOT MINI DOW", "EURX EURO-BOBL", "CBT CORN", "ICEUS FCOJ-A"],
-      date: { "from": 20200902, "to": 20200930 },
       marketData: {}
     }
   },
   methods: {
     async loadData() {
-      this.marketData = (await getMarketSumData(this.selectedColumns, this.period, this.selectedProducts, this.date)).data;
+      this.marketData = (await getMarketSumData(this.selectedColumns, this.period, this.selectedProducts, this.dateRange)).data;
     }
   },
   components: {
-    DashBoard: DashBoard
+    DashBoard: DashBoard,
+    DateRangePicker: DateRangePicker
   }
 }
 </script>
