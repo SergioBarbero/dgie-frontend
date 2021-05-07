@@ -8,7 +8,7 @@
       <tr v-for="product in Object.keys(marketData)" :key="product">
         <th>{{ product }}</th>
         <th v-for="column in columns" :key="column">
-          {{ marketData[product][0]["SUM(" + column + ")"] }}
+          {{ marketData[product][0][column] }}
         </th>
       </tr>
     </table>
@@ -21,8 +21,17 @@ export default {
   data() {
     return {}
   },
+  computed: {
+    columns() {
+      const productsArray = Object.keys(this.marketData);
+      if (productsArray.length === 0) {
+        return [];
+      }
+      const products = this.marketData[productsArray[0]][0];
+      return Object.keys(products);
+    }
+  },
   props: {
-    columns: Array,
     marketData: Object,
   },
   async mounted() {},

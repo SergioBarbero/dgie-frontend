@@ -25,7 +25,7 @@
       </b-form-group>
     </div>
     <button @click="loadData">Load data</button>
-    <DashBoard :columns="totalColumns" :marketData="marketData" :date="date"/>
+    <DashBoard :marketData="marketData" :date="date"/>
   </div>
 </template>
 
